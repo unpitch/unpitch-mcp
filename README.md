@@ -81,8 +81,16 @@ tool of their own.
 | `/unpitch:readers`  | Lists the Personas you can simulate against, so you pick who reads before you spend                 |
 | `/unpitch:simulate` | Quotes a Simulation, waits for your confirmation, runs it, prints the link                          |
 
-Install the plugin from this repository once it is listed as a marketplace; until then the four
-prompts in [`commands/`](./commands) can be copied into your own `.claude/commands/`.
+This repository is a Claude Code marketplace. Add it once, then install the plugin:
+
+```sh
+claude plugin marketplace add unpitch/unpitch-mcp
+claude plugin install unpitch@unpitch
+```
+
+The plugin declares no MCP server, so the `claude mcp add` step above still connects Claude Code to
+Unpitch; the plugin only adds the commands. Without it, the four prompts in
+[`commands/`](./commands) can be copied into your own `.claude/commands/`.
 
 ## Revoke
 
