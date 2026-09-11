@@ -1,0 +1,9 @@
+{
+  "name": "unpitch",
+  "version": "0.1.0",
+  "description": "Test your outreach in Claude Code: save drafts as Unpitch Documents, run Quality Check, and simulate ICP reactions before you send.",
+  "author": { "name": "Unpitch", "url": "https://unpitch.ai" },
+  "homepage": "https://unpitch.ai/integrations/claude-code",
+  "repository": "https://github.com/unpitch/unpitch-mcp",
+  "keywords": ["unpitch", "outreach", "mcp", "quality-check", "simulation"]
+}

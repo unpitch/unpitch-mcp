@@ -1,0 +1,11 @@
+{
+  "name": "unpitch",
+  "owner": { "name": "Unpitch", "url": "https://unpitch.ai" },
+  "plugins": [
+    {
+      "name": "unpitch",
+      "source": "./",
+      "description": "Test your outreach in Claude Code with Unpitch: Quality Check and ICP Simulation on your drafts."
+    }
+  ]
+}

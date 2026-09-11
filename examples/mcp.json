@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "unpitch": {
+      "type": "http",
+      "url": "https://api.unpitch.ai/mcp",
+      "oauth": {
+        "clientId": "PUBLIC_CLIENT_ID",
+        "callbackPort": 8080
+      }
+    }
+  }
+}
