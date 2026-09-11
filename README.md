@@ -21,6 +21,9 @@ the setup guide and in the setup dialog under Settings → Integrations. There i
 and nothing to register yourself. The callback is fixed to `http://localhost:8080/callback`, which
 is why the port is part of the command.
 
+Sign-in requests the `email` scope. What each tool may do is declared by the tool, not by the
+sign-in.
+
 Prefer project scope? The command above with `--scope project` writes [`examples/mcp.json`](./examples/mcp.json).
 
 ## Authorise one workspace
