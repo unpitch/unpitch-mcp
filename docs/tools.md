@@ -9,20 +9,20 @@ in Unpitch URLs.
 | Tool                    | Input                                        | Returns                                                                                              | Cost |
 | ----------------------- | -------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---- |
 | `get_workspace_context` | none                                         | Workspace and organisation slugs, available evaluation capacity and credits, room left in the monthly Claude Code limit and when it resets | Free |
-| `list_documents`        | optional cursor and page size                | A bounded page of Documents with title, type and the revision identity each later read or edit must name | Free |
-| `get_document`          | Document short ID                            | One Document with its typed content and current revision                                             | Free |
-| `search_knowledge`      | a question                                   | A small set of workspace-scoped Knowledge Base excerpts, each with its source                        | Free |
-| `list_personas`         | optional cursor and page size                | Personas eligible for Simulation, marked standard or researched                                      | Free |
-| `get_run`               | run short ID                                 | The public result of one Quality Check or Simulation once complete, or its current state             | Free |
+| `list_documents`        | optional `limit` (1–50) and page `cursor`    | A bounded page of Documents with title, type and the revision identity each later read or edit must name | Free |
+| `get_document`          | `documentShortId`                            | One Document with its typed content and current revision                                             | Free |
+| `search_knowledge`      | `query`, optional `limit` (1–20)             | A small set of workspace-scoped Knowledge Base excerpts, each with its source                        | Free |
+| `list_personas`         | optional `limit` (1–50) and page `cursor`    | Personas eligible for Simulation, marked standard or researched                                      | Free |
+| `get_run`               | `runShortId`                                 | The public result of one Quality Check or Simulation once complete, or its current state             | Free |
 
 ## Write
 
 | Tool              | Input                                                  | Returns                                                                 | Cost |
 | ----------------- | ------------------------------------------------------ | ----------------------------------------------------------------------- | ---- |
-| `create_document` | type, title, typed content, request ID                 | The new Document's short ID and revision                                | Free |
-| `update_document` | short ID, expected revision, changes, request ID       | The new revision, or a conflict if the Document changed since your read | Free |
+| `create_document` | `idempotencyKey`, `title`, typed `content`, optional `projectShortId` | The new Document's short ID and revision                                | Free |
+| `update_document` | `idempotencyKey`, `documentShortId`, `expectedRevision`, `expectedContentHash`, `expectedUpdatedAt`, and at least one of `title`, `projectShortId`, `content` | The new revision, or a conflict if the Document changed since your read | Free |
 
-Every write names a request ID so a retry never creates a duplicate. `update_document` is
+Every write and every run names an `idempotencyKey`, so a retry never creates a duplicate. `update_document` is
 revision-checked: a stale revision returns a conflict instead of overwriting newer work. Read the
 Document again and retry against the current revision.
 
@@ -30,9 +30,9 @@ Document again and retry against the current revision.
 
 | Tool                | Input                                                  | Returns                                                                                         | Cost                                                                          |
 | ------------------- | ------------------------------------------------------ | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| `run_quality_check` | Document short ID, exact revision, request ID          | A run short ID to poll with `get_run`, or a five-minute quote to confirm when credits are needed | Included capacity first; credits only after a confirmed quote                 |
-| `quote_simulation`  | Document short ID and revision, Persona and version    | A five-minute quote with the price and the room left in the monthly limit; nothing is spent     | Free                                                                          |
-| `run_simulation`    | the quote, request ID                                  | A run short ID to poll with `get_run`                                                           | 10 credits per run                                                            |
+| `run_quality_check` | `idempotencyKey`, `documentShortId`, `expectedRevision`, `expectedContentHash`, optional `quoteReference` | A run short ID to poll with `get_run`, or a five-minute quote to confirm when credits are needed | Included capacity first; credits only after a confirmed quote                 |
+| `quote_simulation`  | `idempotencyKey`, `documentShortId`, `expectedRevision`, `expectedContentHash`, `personaShortId`, `expectedPersonaUpdatedAt` | A five-minute quote with the price and the room left in the monthly limit; nothing is spent     | Free                                                                          |
+| `run_simulation`    | the same fields as `quote_simulation` plus the `quoteReference` it returned | A run short ID to poll with `get_run`                                                           | 10 credits per run                                                            |
 
 Runs are asynchronous. Poll `get_run` until the result is ready, then open the link it returns in
 Unpitch. Results are the same ones the app shows.
