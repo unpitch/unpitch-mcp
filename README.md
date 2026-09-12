@@ -13,10 +13,10 @@ contains no server code and no secrets. The canonical setup guide is
 Run this in the terminal on the machine where you use Claude Code:
 
 ```sh
-claude mcp add --transport http --client-id PUBLIC_CLIENT_ID --callback-port 8080 unpitch https://api.unpitch.ai/mcp
+claude mcp add --transport http --client-id ae21983d-3072-43ab-ad47-d5feae975afc --callback-port 8080 unpitch https://api.unpitch.ai/mcp
 ```
 
-`PUBLIC_CLIENT_ID` is the one public client Unpitch registers for Claude Code. It is published on
+`ae21983d-3072-43ab-ad47-d5feae975afc` is the one public client Unpitch registers for Claude Code. It is published on
 the setup guide and in the setup dialog under Settings → Integrations. There is no client secret
 and nothing to register yourself. The callback is fixed to `http://localhost:8080/callback`, which
 is why the port is part of the command.
@@ -45,7 +45,7 @@ Or paste this into Claude Code and let it run the whole sequence:
 ```text
 Set up Unpitch for me.
 
-1. Run: claude mcp add --transport http --client-id PUBLIC_CLIENT_ID --callback-port 8080 unpitch https://api.unpitch.ai/mcp
+1. Run: claude mcp add --transport http --client-id ae21983d-3072-43ab-ad47-d5feae975afc --callback-port 8080 unpitch https://api.unpitch.ai/mcp
 2. Walk me through opening /mcp and authorising Unpitch in my browser, where I choose my workspace.
 3. After I confirm, call get_workspace_context and report the returned workspace and available credits.
 ```

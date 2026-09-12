@@ -4,7 +4,7 @@
       "type": "http",
       "url": "https://api.unpitch.ai/mcp",
       "oauth": {
-        "clientId": "PUBLIC_CLIENT_ID",
+        "clientId": "ae21983d-3072-43ab-ad47-d5feae975afc",
         "callbackPort": 8080
       }
     }
