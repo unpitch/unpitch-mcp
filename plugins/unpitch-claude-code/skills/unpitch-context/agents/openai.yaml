@@ -1,0 +1,12 @@
+interface:
+  display_name: "Unpitch context"
+  short_description: "Show workspace, capacity, credits, and limits"
+  default_prompt: "Use $unpitch-context to show which Unpitch workspace is connected and what evaluation capacity is available."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "unpitch"
+      description: "Unpitch workspace, document, Quality Check, and Simulation tools"
+      transport: "streamable_http"
+      url: "https://api.unpitch.ai/mcp"

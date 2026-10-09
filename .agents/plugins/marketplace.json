@@ -1,0 +1,20 @@
+{
+  "name": "unpitch",
+  "interface": {
+    "displayName": "Unpitch"
+  },
+  "plugins": [
+    {
+      "name": "unpitch-hosted",
+      "source": {
+        "source": "local",
+        "path": "./plugins/unpitch"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "unpitch-hosted",
+  "version": "0.2.0",
+  "description": "Save and test outreach with Unpitch Quality Check and ICP Simulation.",
+  "author": {
+    "name": "Unpitch",
+    "url": "https://unpitch.ai"
+  },
+  "homepage": "https://unpitch.ai",
+  "repository": "https://github.com/unpitch/unpitch-mcp",
+  "keywords": ["unpitch", "outreach", "quality-check", "simulation", "mcp"],
+  "extensions": {
+    "com.openai": {
+      "onboardingSkill": "./skills/setup-unpitch/SKILL.md",
+      "interface": {
+        "displayName": "Unpitch",
+        "shortDescription": "Check outreach and simulate ICP reactions",
+        "longDescription": "Save an exact outreach draft to Unpitch, run a Quality Check, and simulate how a chosen ICP Persona reacts before you send.",
+        "developerName": "Unpitch",
+        "category": "Productivity",
+        "capabilities": ["Read", "Write"],
+        "websiteURL": "https://unpitch.ai",
+        "defaultPrompt": [
+          "Check this outreach draft with Unpitch.",
+          "Show me the Unpitch Personas I can simulate against.",
+          "Simulate this exact draft against a selected Unpitch Persona."
+        ]
+      }
+    }
+  }
+}

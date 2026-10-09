@@ -1,0 +1,12 @@
+interface:
+  display_name: "Set up Unpitch"
+  short_description: "Connect Unpitch and verify the workspace"
+  default_prompt: "Use $setup-unpitch to connect my Unpitch account and verify the selected workspace without spending credits."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "unpitch"
+      description: "Unpitch workspace, document, Quality Check, and Simulation tools"
+      transport: "streamable_http"
+      url: "https://api.unpitch.ai/mcp"

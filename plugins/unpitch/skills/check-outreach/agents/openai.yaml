@@ -1,0 +1,12 @@
+interface:
+  display_name: "Check outreach with Unpitch"
+  short_description: "Save a draft and run a Quality Check"
+  default_prompt: "Use $check-outreach to save this exact draft and run an Unpitch Quality Check without rewriting it."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "unpitch"
+      description: "Unpitch workspace, document, Quality Check, and Simulation tools"
+      transport: "streamable_http"
+      url: "https://api.unpitch.ai/mcp"

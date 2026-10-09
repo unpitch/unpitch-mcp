@@ -1,6 +1,6 @@
 ---
 description: Read workspace, Document, business, Persona, or evaluation context from Unpitch
-allowed-tools: mcp__unpitch__get_workspace_context, mcp__unpitch__list_documents, mcp__unpitch__get_document, mcp__unpitch__search_knowledge, mcp__unpitch__list_personas, mcp__unpitch__get_run
+allowed-tools: mcp__plugin_unpitch-hosted_unpitch__get_workspace_context, mcp__plugin_unpitch-hosted_unpitch__list_documents, mcp__plugin_unpitch-hosted_unpitch__get_document, mcp__plugin_unpitch-hosted_unpitch__search_knowledge, mcp__plugin_unpitch-hosted_unpitch__list_personas, mcp__plugin_unpitch-hosted_unpitch__get_run
 ---
 
 Use only the read-only Unpitch tools above to answer: $ARGUMENTS

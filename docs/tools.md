@@ -8,12 +8,12 @@ in Unpitch URLs.
 
 | Tool                    | Input                                        | Returns                                                                                              | Cost |
 | ----------------------- | -------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---- |
-| `get_workspace_context` | none                                         | Workspace and organisation slugs, available evaluation capacity and credits, room left in the monthly Claude Code limit and when it resets | Free |
+| `get_workspace_context` | none                                         | Workspace and organisation slugs, available evaluation capacity and credits, room left in the monthly integration limit and when it resets | Free |
 | `list_documents`        | optional `limit` (1–50) and page `cursor`    | A bounded page of Documents with title, type and the revision identity each later read or edit must name | Free |
 | `get_document`          | `documentShortId`                            | One Document with its typed content and current revision                                             | Free |
 | `search_knowledge`      | `query`, optional `limit` (1–20)             | A small set of workspace-scoped Knowledge Base excerpts, each with its source                        | Free |
 | `list_personas`         | optional `limit` (1–50) and page `cursor`    | Personas eligible for Simulation, marked standard or researched                                      | Free |
-| `get_run`               | `runShortId`                                 | The public result of one Quality Check or Simulation once complete, or its current state             | Free |
+| `get_run`               | `runShortId`                                 | The run short ID, current state, and completed public result when ready; no result URL is returned    | Free |
 
 ## Write
 
@@ -32,10 +32,11 @@ Document again and retry against the current revision.
 | ------------------- | ------------------------------------------------------ | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
 | `run_quality_check` | `idempotencyKey`, `documentShortId`, `expectedRevision`, `expectedContentHash`, optional `quoteReference` | A run short ID to poll with `get_run`, or a five-minute quote to confirm when credits are needed | Included capacity first; credits only after a confirmed quote                 |
 | `quote_simulation`  | `idempotencyKey`, `documentShortId`, `expectedRevision`, `expectedContentHash`, `personaShortId`, `expectedPersonaUpdatedAt` | A five-minute quote with the price and the room left in the monthly limit; nothing is spent     | Free                                                                          |
-| `run_simulation`    | the same fields as `quote_simulation` plus the `quoteReference` it returned | A run short ID to poll with `get_run`                                                           | 10 credits per run                                                            |
+| `run_simulation`    | the same fields as `quote_simulation` plus the `quoteReference` it returned | A run short ID to poll with `get_run`                                                           | The displayed quote is authoritative; credits are spent only after approval   |
 
-Runs are asynchronous. Poll `get_run` until the result is ready, then open the link it returns in
-Unpitch. Results are the same ones the app shows.
+Runs are asynchronous. Poll `get_run` until the result is ready, then summarize the returned result
+and include its run short ID. The tool does not return a result URL. Present user-facing finding
+names and omit internal principle identifiers and numbers.
 
 ## What is not here
 

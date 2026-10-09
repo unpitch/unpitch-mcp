@@ -1,0 +1,12 @@
+interface:
+  display_name: "Simulate outreach with Unpitch"
+  short_description: "Quote and run one ICP Simulation"
+  default_prompt: "Use $simulate-outreach to quote and simulate this exact draft against an Unpitch Persona after I approve the spend."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "unpitch"
+      description: "Unpitch workspace, document, Quality Check, and Simulation tools"
+      transport: "streamable_http"
+      url: "https://api.unpitch.ai/mcp"

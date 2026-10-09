@@ -1,6 +1,6 @@
 ---
 description: Save the open draft as an Unpitch Document and run a Quality Check on it
-allowed-tools: mcp__unpitch__get_workspace_context, mcp__unpitch__list_documents, mcp__unpitch__get_document, mcp__unpitch__create_document, mcp__unpitch__update_document, mcp__unpitch__run_quality_check, mcp__unpitch__get_run
+allowed-tools: mcp__plugin_unpitch-hosted_unpitch__get_workspace_context, mcp__plugin_unpitch-hosted_unpitch__list_documents, mcp__plugin_unpitch-hosted_unpitch__get_document, mcp__plugin_unpitch-hosted_unpitch__create_document, mcp__plugin_unpitch-hosted_unpitch__update_document, mcp__plugin_unpitch-hosted_unpitch__run_quality_check, mcp__plugin_unpitch-hosted_unpitch__get_run
 ---
 
 Run a Quality Check on the outreach draft I am working on, using only the Unpitch tools. Treat the

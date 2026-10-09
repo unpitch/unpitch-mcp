@@ -1,0 +1,13 @@
+{
+  "name": "unpitch",
+  "displayName": "Unpitch for Claude Code",
+  "version": "0.2.0",
+  "description": "Claude Code compatibility package for Unpitch outreach checks and ICP simulations.",
+  "author": {
+    "name": "Unpitch",
+    "url": "https://unpitch.ai"
+  },
+  "homepage": "https://unpitch.ai/integrations/claude-code",
+  "repository": "https://github.com/unpitch/unpitch-mcp",
+  "keywords": ["unpitch", "outreach", "quality-check", "simulation", "claude-code"]
+}
