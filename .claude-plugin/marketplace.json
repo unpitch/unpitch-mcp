@@ -1,11 +1,23 @@
 {
   "name": "unpitch",
+  "description": "Unpitch workflows for checking outreach and simulating ICP reactions.",
   "owner": { "name": "Unpitch", "url": "https://unpitch.ai" },
   "plugins": [
     {
       "name": "unpitch",
-      "source": "./",
-      "description": "Test your outreach in Claude Code with Unpitch: Quality Check and ICP Simulation on your drafts."
+      "displayName": "Unpitch for Claude Code",
+      "source": "./plugins/unpitch-claude-code",
+      "description": "Claude Code workflows for the existing manually configured Unpitch connection.",
+      "category": "Productivity",
+      "tags": ["outreach", "quality-check", "simulation", "claude-code"]
+    },
+    {
+      "name": "unpitch-hosted",
+      "displayName": "Unpitch",
+      "source": "./plugins/unpitch",
+      "description": "Save and test outreach with Unpitch Quality Check and ICP Simulation.",
+      "category": "Productivity",
+      "tags": ["outreach", "quality-check", "simulation"]
     }
   ]
 }

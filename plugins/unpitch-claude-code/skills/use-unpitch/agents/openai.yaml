@@ -1,0 +1,12 @@
+interface:
+  display_name: "Use Unpitch"
+  short_description: "Read, save, search, or evaluate with Unpitch"
+  default_prompt: "Use $use-unpitch to handle this Unpitch request with the appropriate read, Document, business-context, or evaluation workflow."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "unpitch"
+      description: "Unpitch workspace, document, Knowledge Base, Persona, Quality Check, Simulation, and result tools"
+      transport: "streamable_http"
+      url: "https://api.unpitch.ai/mcp"

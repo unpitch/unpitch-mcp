@@ -1,0 +1,12 @@
+interface:
+  display_name: "Choose an Unpitch reader"
+  short_description: "List Personas before running a Simulation"
+  default_prompt: "Use $choose-unpitch-reader to show the Unpitch Personas I can simulate against before spending credits."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "unpitch"
+      description: "Unpitch workspace, document, Quality Check, and Simulation tools"
+      transport: "streamable_http"
+      url: "https://api.unpitch.ai/mcp"
