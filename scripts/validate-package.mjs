@@ -35,6 +35,7 @@ const skillFiles = expectedSkills.flatMap((skill) => [
   `skills/${skill}/agents/openai.yaml`,
 ]);
 const hostedPackageFiles = [
+  "assets/unpitch-icon.svg",
   ".claude-plugin/plugin.json",
   ".mcp.json",
   "README.md",
@@ -44,6 +45,7 @@ const hostedPackageFiles = [
   ...skillFiles,
 ].sort();
 const codePackageFiles = [
+  "assets/unpitch-icon.svg",
   ".claude-plugin/plugin.json",
   "README.md",
   ...commandNames.map((name) => `commands/${name}`),
@@ -172,7 +174,7 @@ assertPackageFiles(codeRoot, codePackageFiles, "Claude Code plugin");
 const portableManifest = readJson(join(hostedRoot, "plugin.json"));
 assert.equal(portableManifest.$schema, "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json");
 assert.equal(portableManifest.name, "unpitch-hosted");
-assert.equal(portableManifest.version, "0.2.1");
+assert.equal(portableManifest.version, "0.2.2");
 assert.equal(
   portableManifest.extensions?.["com.openai"]?.onboardingSkill,
   "./skills/setup-unpitch/SKILL.md",

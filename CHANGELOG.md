@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.2
+
+- Package the current Unpitch logomark for Claude listings and ChatGPT logo/composer metadata.
+
+## 0.2.1
+
+- Align assistant-specific descriptions with the Unpitch outreach positioning.
+
 ## 0.2.0
 
 - Added a portable Agent Plugins manifest, hosted MCP definition, OpenAI marketplace catalog, and
