@@ -378,8 +378,16 @@ assert.match(maintainerRelease, /must not add a `\.mcp\.json`/);
 
 const readme = readFileSync(join(packageRoot, "README.md"), "utf8");
 assert.match(readme, /Installing a plugin and connecting an Unpitch account are separate steps/);
-assert.match(readme, /Connection verification pending/);
-assert.match(readme, /live server does not\n>\s+support it yet/);
+assert.match(
+  readme,
+  /Connection verification pending/,
+  "README must retain the pending connection verification warning",
+);
+assert.doesNotMatch(
+  readme,
+  /live server does not\s+(?:>\s*)?support it yet/i,
+  "README must not claim the live server lacks Dynamic Client Registration",
+);
 assert.match(readme, /Customize > Plugins/);
 assert.match(readme, /Add from a repository/);
 assert.match(readme, /select \*\*Sync\*\*/);

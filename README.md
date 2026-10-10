@@ -5,10 +5,10 @@ Check, or simulate how a chosen ICP Persona reacts. The packaged workflows do no
 unless you ask. Any evaluation that needs credits shows the quote and waits for your explicit
 approval before spending.
 
-> **Connection verification pending:** the marketplace package is available, but hosted sign-in
-> requires Unpitch's server-side Dynamic Client Registration rollout. The live server does not
-> support it yet. Complete [`docs/maintainer-release.md`](./docs/maintainer-release.md) before
-> enabling or announcing the hosted connection for customers.
+> **Connection verification pending (10 October 2026):** Claude Desktop sign-in and ten of the
+> eleven Unpitch tools have been tested in the real app. The paid Simulation run, ChatGPT Desktop connection, and
+> Claude Code install/update checks are still pending. See
+> [`docs/maintainer-release.md`](./docs/maintainer-release.md) for the remaining release checks.
 
 Installing a plugin and connecting an Unpitch account are separate steps. Both packages add the
 workflows; the hosted package also adds a connector definition, while Claude Code prepares or
@@ -16,8 +16,6 @@ reuses its existing connection through the setup instructions. You still sign in
 assistant can use its tools.
 
 ## Add to Claude
-
-After the release gate is cleared:
 
 1. Open **Customize > Plugins**.
 2. Select **Add > Add marketplace**.
@@ -29,9 +27,11 @@ After the release gate is cleared:
 6. Ask: “Show my Unpitch workspace and available credits.” A successful
    `get_workspace_context` response proves the account connection without spending credits.
 
-## Add to ChatGPT
+## Add to ChatGPT Desktop
 
-After the release gate is cleared:
+Use the desktop app with **Plugins > Add > Add a marketplace** available. The ChatGPT website's
+Plugins menu does not currently offer this installation route. This client still needs an
+end-to-end connection check before its setup can be marked verified.
 
 1. Open **Plugins**.
 2. Select **Add > Add a marketplace**.

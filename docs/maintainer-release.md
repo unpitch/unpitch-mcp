@@ -6,6 +6,21 @@ supports Dynamic Client Registration for the hosted clients that will install it
 source can be published before that rollout with hosted sign-in clearly marked as unavailable.
 Schema validation alone does not prove sign-in works.
 
+## Current verification status — 10 October 2026
+
+Production discovery now advertises Dynamic Client Registration, and Claude Desktop sign-in has
+completed through the GitHub marketplace package. The native connector exposes all eleven tools.
+Ten have been exercised: workspace context, document/persona lists, knowledge search, document
+creation/read/update, included Quality Check, run retrieval, and Simulation quote. The document
+creation replay reused the same document, a stale update returned a conflict, and the included
+Quality Check completed at zero credits.
+
+Remaining native checks are a paid Simulation run after explicit approval of its displayed quote,
+ChatGPT Desktop's install and account connection, and the Claude Code clean-install/update
+compatibility checks below. The ChatGPT website does not expose **Add a marketplace**; test the
+desktop client. Do not represent
+these pending paths as verified or submit the public-directory application yet.
+
 ## Backend dependency
 
 Verify the production authorization metadata used by `https://api.unpitch.ai/mcp`:
@@ -55,7 +70,7 @@ Claude Code compatibility check additionally needs one client with the shipped s
 1. In Claude, follow **Customize > Plugins > Add > Add marketplace**, choose
    **Add from a repository**, paste the repository URL, select **Sync**, install **Unpitch**, and
    confirm the plugin is installed but the account is not represented as connected before OAuth.
-2. In ChatGPT, follow **Plugins > Add > Add a marketplace**, install **Unpitch**, and make the same
+2. In ChatGPT Desktop, follow **Plugins > Add > Add a marketplace**, install **Unpitch**, and make the same
    install-versus-connect check. Follow the prompts and supply the copied marketplace link when
    ChatGPT requests it rather than assuming an unverified field label.
 3. On each hosted client, connect Unpitch, choose one workspace, and call
