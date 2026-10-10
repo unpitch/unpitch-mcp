@@ -1,9 +1,13 @@
 # Unpitch plugin marketplace
 
-Write or revise outreach in your assistant, then use Unpitch to save the exact draft, run a Quality
-Check, or simulate how a chosen ICP Persona reacts. The packaged workflows do not rewrite your copy
-unless you ask. Any evaluation that needs credits shows the quote and waits for your explicit
-approval before spending.
+**Make Claude and ChatGPT better at outreach.**
+
+Catch AI slop and weak spots in your messages. Test drafts with personas modeled on your ideal
+buyers, then use the feedback to improve your outreach in the same conversation.
+
+Unpitch saves and evaluates the draft you choose. Your assistant revises it with you when you ask.
+Any evaluation that needs credits shows the quote and waits for your explicit approval before
+spending.
 
 > **Connection verification pending (10 October 2026):** Claude Desktop sign-in and ten of the
 > eleven Unpitch tools have been tested in the real app. The paid Simulation run, ChatGPT Desktop connection, and

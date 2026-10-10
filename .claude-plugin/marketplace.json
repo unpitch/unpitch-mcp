@@ -1,13 +1,13 @@
 {
   "name": "unpitch",
-  "description": "Unpitch workflows for checking outreach and simulating ICP reactions.",
+  "description": "Make Claude and ChatGPT better at outreach. Catch weak spots in your messages and test drafts with personas modeled on your ideal buyers.",
   "owner": { "name": "Unpitch", "url": "https://unpitch.ai" },
   "plugins": [
     {
       "name": "unpitch",
       "displayName": "Unpitch for Claude Code",
       "source": "./plugins/unpitch-claude-code",
-      "description": "Claude Code workflows for the existing manually configured Unpitch connection.",
+      "description": "Make Claude Code better at outreach. Catch AI slop and weak spots in your messages. Test drafts with personas modeled on your ideal buyers, then use the feedback to improve your outreach in the same conversation.",
       "category": "Productivity",
       "tags": ["outreach", "quality-check", "simulation", "claude-code"]
     },
@@ -15,7 +15,7 @@
       "name": "unpitch-hosted",
       "displayName": "Unpitch",
       "source": "./plugins/unpitch",
-      "description": "Save and test outreach with Unpitch Quality Check and ICP Simulation.",
+      "description": "Make Claude better at outreach. Catch AI slop and weak spots in your messages. Test drafts with personas modeled on your ideal buyers, then use the feedback to improve your outreach in the same conversation.",
       "category": "Productivity",
       "tags": ["outreach", "quality-check", "simulation"]
     }
