@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "unpitch-hosted",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Make Claude and ChatGPT better at outreach. Catch AI slop and weak spots in your messages. Test drafts with personas modeled on your ideal buyers, then use the feedback to improve your outreach in the same conversation.",
   "author": {
     "name": "Unpitch",
@@ -25,7 +25,9 @@
           "Check this outreach draft with Unpitch.",
           "Show me the Unpitch Personas I can simulate against.",
           "Simulate this exact draft against a selected Unpitch Persona."
-        ]
+        ],
+        "logo": "./assets/unpitch-icon.svg",
+        "composerIcon": "./assets/unpitch-icon.svg"
       }
     }
   }
