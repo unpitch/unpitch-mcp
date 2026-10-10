@@ -1,9 +1,12 @@
 # Unpitch
 
-Use Unpitch from a supported assistant to save the exact outreach draft you are working on, run a
-Quality Check, and simulate how a selected ICP Persona reacts. The plugin keeps drafting and
-revision in the assistant while Unpitch stores and evaluates the version you choose. It never
-spends quoted credits without explicit approval.
+**Make Claude and ChatGPT better at outreach.**
+
+Catch AI slop and weak spots in your messages. Test drafts with personas modeled on your ideal
+buyers, then use the feedback to improve your outreach in the same conversation.
+
+Unpitch saves and evaluates the draft you choose. Your assistant revises it with you when you ask.
+It never spends quoted credits without explicit approval.
 
 This package uses Dynamic Client Registration. Installing it adds the plugin and connector
 definition; it does not prove that an Unpitch account is connected. Connect Unpitch from the

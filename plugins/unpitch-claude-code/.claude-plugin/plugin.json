@@ -1,8 +1,8 @@
 {
   "name": "unpitch",
   "displayName": "Unpitch for Claude Code",
-  "version": "0.2.0",
-  "description": "Claude Code compatibility package for Unpitch outreach checks and ICP simulations.",
+  "version": "0.2.1",
+  "description": "Make Claude Code better at outreach. Catch AI slop and weak spots in your messages. Test drafts with personas modeled on your ideal buyers, then use the feedback to improve your outreach in the same conversation.",
   "author": {
     "name": "Unpitch",
     "url": "https://unpitch.ai"

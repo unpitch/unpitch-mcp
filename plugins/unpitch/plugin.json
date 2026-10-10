@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "unpitch-hosted",
-  "version": "0.2.0",
-  "description": "Save and test outreach with Unpitch Quality Check and ICP Simulation.",
+  "version": "0.2.1",
+  "description": "Make Claude and ChatGPT better at outreach. Catch AI slop and weak spots in your messages. Test drafts with personas modeled on your ideal buyers, then use the feedback to improve your outreach in the same conversation.",
   "author": {
     "name": "Unpitch",
     "url": "https://unpitch.ai"
@@ -15,8 +15,8 @@
       "onboardingSkill": "./skills/setup-unpitch/SKILL.md",
       "interface": {
         "displayName": "Unpitch",
-        "shortDescription": "Check outreach and simulate ICP reactions",
-        "longDescription": "Save an exact outreach draft to Unpitch, run a Quality Check, and simulate how a chosen ICP Persona reacts before you send.",
+        "shortDescription": "Make ChatGPT better at outreach",
+        "longDescription": "Make ChatGPT better at outreach. Catch AI slop and weak spots in your messages. Test drafts with personas modeled on your ideal buyers, then use the feedback to improve your outreach in the same conversation.",
         "developerName": "Unpitch",
         "category": "Productivity",
         "capabilities": ["Read", "Write"],

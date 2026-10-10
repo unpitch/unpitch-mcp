@@ -1,5 +1,10 @@
 # Unpitch for Claude Code
 
+**Make Claude Code better at outreach.**
+
+Catch AI slop and weak spots in your messages. Test drafts with personas modeled on your ideal
+buyers. Use the feedback to improve your draft with Claude Code, in the same conversation.
+
 Install Unpitch from the marketplace and let Claude Code complete the connection setup:
 
 1. Open **Settings > Integrations** in Unpitch and choose **Set up** beside Claude Code.
