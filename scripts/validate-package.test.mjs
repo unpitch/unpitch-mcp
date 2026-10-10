@@ -275,6 +275,23 @@ expectValidatorFailure(
 );
 
 expectValidatorFailure(
+  "missing connection verification warning",
+  (root) => mutateTextFile(join(root, "README.md"), (text) =>
+    text.replace(/^>.*\n/gm, "")),
+  /README must retain the pending connection verification warning/,
+);
+
+expectValidatorFailure(
+  "obsolete live DCR unavailability claim",
+  (root) => mutateTextFile(join(root, "README.md"), (text) =>
+    text.replace(
+      "Installing a plugin and connecting an Unpitch account are separate steps.",
+      "> The hosted package expects Dynamic Client Registration, but the live server does not\n> support it yet.\n\nInstalling a plugin and connecting an Unpitch account are separate steps.",
+    )),
+  /README must not claim the live server lacks Dynamic Client Registration/,
+);
+
+expectValidatorFailure(
   "customer raw CLI setup alternative",
   (root) => mutateTextFile(join(root, "README.md"), (text) =>
     text.replace(
@@ -318,4 +335,4 @@ for (const pluginDirectory of ["unpitch", "unpitch-claude-code"]) {
   }
 }
 
-console.log("Package validator mutation tests passed (25 negative cases).");
+console.log("Package validator mutation tests passed (27 negative cases).");
