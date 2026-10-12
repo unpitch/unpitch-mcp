@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.3
+
+- License the public plugin repository under MIT.
+- Add documentation, support, privacy, and terms links for Claude directory listings.
+- Use a static Unpitch logomark that the directory can render.
+- Update the documented Claude Code installation and update verification status.
+
 ## 0.2.2
 
 - Package the current Unpitch logomark for Claude listings and ChatGPT logo/composer metadata.

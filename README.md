@@ -10,8 +10,9 @@ Any evaluation that needs credits shows the quote and waits for your explicit ap
 spending.
 
 > **Connection verification pending (10 October 2026):** Claude Desktop sign-in and ten of the
-> eleven Unpitch tools have been tested in the real app. The paid Simulation run, ChatGPT Desktop connection, and
-> Claude Code install/update checks are still pending. See
+> eleven Unpitch tools have been tested in the real app. Claude Code installation, update, and a real
+> workspace read have also passed. The paid Simulation run and ChatGPT Desktop connection are still
+> pending. See
 > [`docs/maintainer-release.md`](./docs/maintainer-release.md) for the remaining release checks.
 
 Installing a plugin and connecting an Unpitch account are separate steps. Both packages add the
@@ -78,6 +79,9 @@ Tool details: [`docs/tools.md`](./docs/tools.md). Permissions and OAuth separati
 [`docs/troubleshooting.md`](./docs/troubleshooting.md).
 
 ## Package layout and validation
+
+This public plugin repository is licensed under [MIT](./LICENSE). The license covers the files in
+this repository; it does not license the separately hosted Unpitch application or its private source.
 
 - `plugins/unpitch/` is the portable, DCR-only `unpitch-hosted` package for hosted Claude, ChatGPT,
   and compatible plugin hosts. Its display name is **Unpitch**.
