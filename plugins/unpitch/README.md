@@ -13,6 +13,10 @@ definition; it does not prove that an Unpitch account is connected. Connect Unpi
 plugin's connector settings, sign in, choose one workspace, and verify with
 `get_workspace_context` before using a write or evaluation tool.
 
-This package's machine identity is `unpitch-hosted`; supported clients show **Unpitch**. The
-server-side DCR release gate in the marketplace repository must be cleared before this package is
-published for hosted clients.
+This package's machine identity is `unpitch-hosted`; supported clients show **Unpitch**. Claude
+Desktop sign-in and ten of the eleven tools have been tested in the real app. A paid Simulation
+run and ChatGPT Desktop account connection still await end-to-end verification.
+
+The public plugin package is licensed under MIT. Unpitch account access and hosted evaluations are
+covered by the [Unpitch terms](https://unpitch.ai/terms) and
+[privacy policy](https://unpitch.ai/privacy).

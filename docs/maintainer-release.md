@@ -15,9 +15,12 @@ creation/read/update, included Quality Check, run retrieval, and Simulation quot
 creation replay reused the same document, a stale update returned a conflict, and the included
 Quality Check completed at zero credits.
 
-Remaining native checks are a paid Simulation run after explicit approval of its displayed quote,
-ChatGPT Desktop's install and account connection, and the Claude Code clean-install/update
-compatibility checks below. The ChatGPT website does not expose **Add a marketplace**; test the
+Claude Code installation, update to 0.2.2, and a fresh-session workspace read have passed while
+preserving the existing manual connection and public client identity.
+
+Remaining native checks are a paid Simulation run after explicit approval of its displayed quote
+and ChatGPT Desktop's install and account connection. The ChatGPT website does not expose
+**Add a marketplace**; test the
 desktop client. Do not represent
 these pending paths as verified or submit the public-directory application yet.
 

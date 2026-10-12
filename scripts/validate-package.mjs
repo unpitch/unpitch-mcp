@@ -174,7 +174,7 @@ assertPackageFiles(codeRoot, codePackageFiles, "Claude Code plugin");
 const portableManifest = readJson(join(hostedRoot, "plugin.json"));
 assert.equal(portableManifest.$schema, "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json");
 assert.equal(portableManifest.name, "unpitch-hosted");
-assert.equal(portableManifest.version, "0.2.2");
+assert.equal(portableManifest.version, "0.2.3");
 assert.equal(
   portableManifest.extensions?.["com.openai"]?.onboardingSkill,
   "./skills/setup-unpitch/SKILL.md",
