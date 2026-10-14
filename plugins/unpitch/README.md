@@ -9,8 +9,8 @@ Unpitch saves and evaluates the draft you choose. Your assistant revises it with
 It never spends quoted credits without explicit approval.
 
 This package uses Dynamic Client Registration. Installing it adds the plugin and connector
-definition; it does not prove that an Unpitch account is connected. Connect Unpitch from the
-plugin's connector settings, sign in, choose one workspace, and verify with
+definition; it does not prove that an Unpitch account is connected. Claude uses the plugin's connector settings. ChatGPT opens sign-in automatically during
+installation. Complete that sign-in, choose one workspace, and verify with
 `get_workspace_context` before using a write or evaluation tool.
 
 This package's machine identity is `unpitch-hosted`; supported clients show **Unpitch**. All eleven MCP tools, including an explicitly approved Simulation, have been exercised through

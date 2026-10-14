@@ -19,6 +19,12 @@ Claude Code installation, update to 0.2.2, and a fresh-session workspace read pa
 preserving the manual connection and public client identity. Version 0.3.0 adds seven commands
 for eleven total in each package; package checks do not establish native execution of every command.
 
+A fresh ChatGPT desktop installation on 14 October requested
+`openid profile email phone offline_access`, which the closed MCP consent policy rejected.
+Version 0.3.1 adds an explicit OpenAI OAuth scope override in portable `mcp.json`:
+`email` and `offline_access`, no OIDC defaults. Claude's separate transport is unchanged.
+A fresh native installation and real workspace response still need verification after this fix.
+
 ChatGPT native install, account connection, and a real tool response remain unverified. Its
 website's personal Plugins menu did not expose Add a marketplace when checked. Follow current
 OpenAI documentation and inspect the actual client's UI instead of treating that older observation

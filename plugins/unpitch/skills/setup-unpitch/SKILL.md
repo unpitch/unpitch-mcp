@@ -14,8 +14,12 @@ named `unpitch`. Neither installation proves that the user's Unpitch account is 
 2. If the call succeeds, report the workspace and organisation, included evaluation capacity,
    available credits, monthly room, and reset time. Say that this successful read verifies the
    connection.
-3. If the tool is unavailable, returns an authorization error, or cannot start sign-in, direct a
-   hosted user to this plugin's **Connectors** tab or MCP connection settings. In Claude Code, have
+3. If the tool is unavailable, returns an authorization error, or cannot start sign-in, guide the
+   current host's actual setup flow. ChatGPT opens sign-in automatically during installation;
+   complete that browser window and choose one workspace. Do not assume ChatGPT has a Connect
+   button or a Connectors tab. If automatic sign-in fails, report the failure and inspect the
+   plugin screen's available recovery controls before giving another step. Claude uses this
+   plugin's **Connectors** tab or MCP connection settings. In Claude Code, have
    the user open **Settings > Integrations** in Unpitch, choose **Set up**, and paste those setup
    instructions into Claude Code. They install from the marketplace and prepare or reuse the
    existing `unpitch` server. Then have the user open `/mcp`, sign in, and choose one workspace.

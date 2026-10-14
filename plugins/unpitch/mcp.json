@@ -3,7 +3,19 @@
   "mcpServers": {
     "unpitch": {
       "type": "streamable-http",
-      "url": "https://api.unpitch.ai/mcp"
+      "url": "https://api.unpitch.ai/mcp",
+      "extensions": {
+        "com.openai": {
+          "auth": {
+            "type": "oauth",
+            "client": { "mode": "dcr" },
+            "resource": "https://api.unpitch.ai/mcp",
+            "baseScopes": ["email", "offline_access"],
+            "defaultScopes": [],
+            "oidcEnabled": false
+          }
+        }
+      }
     }
   }
 }

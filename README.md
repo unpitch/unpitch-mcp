@@ -43,7 +43,9 @@ end-to-end connection check before its setup can be marked verified.
 3. Follow ChatGPT's prompts and paste `https://github.com/unpitch/unpitch-mcp` when it asks for the
    marketplace link.
 4. Add **Unpitch**.
-5. Open its connector settings, connect Unpitch, sign in, and choose the workspace it may use.
+5. Complete the sign-in window that ChatGPT opens automatically after installation, then choose
+   the Unpitch workspace it may use. Installation starts authorization; there is no separate
+   Connect button to find in this flow.
 6. Ask: “Show my Unpitch workspace and available credits.” Do not treat installation alone as proof
    that the account is connected.
 

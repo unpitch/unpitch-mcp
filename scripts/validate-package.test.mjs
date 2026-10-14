@@ -95,10 +95,66 @@ for (const directory of ["commands", "plugins/unpitch/commands", "plugins/unpitc
 const baseline = runScript(packageRoot, "validate-package.mjs");
 assert.equal(baseline.status, 0, outputOf(baseline));
 
+const scopedOAuthFixture = makeFixture();
+try {
+  const path = join(scopedOAuthFixture, "plugins/unpitch/mcp.json");
+  const config = JSON.parse(readFileSync(path, "utf8"));
+  config.mcpServers.unpitch.extensions = {
+    "com.openai": {
+      auth: {
+        type: "oauth",
+        client: { mode: "dcr" },
+        resource: "https://api.unpitch.ai/mcp",
+        baseScopes: ["email", "offline_access"],
+        defaultScopes: [],
+        oidcEnabled: false,
+      },
+    },
+  };
+  writeFileSync(path, JSON.stringify(config));
+  const result = runScript(scopedOAuthFixture, "validate-package.mjs");
+  assert.equal(result.status, 0, "Explicit email/session-only OpenAI OAuth must pass validation: " + outputOf(result));
+} finally {
+  rmSync(scopedOAuthFixture, { recursive: true, force: true });
+}
+
 expectValidatorFailure(
   "missing standalone command",
   (root) => rmSync(join(root, "plugins/unpitch/commands/quote.md")),
   /missing or unexpected public package file/,
+);
+
+expectValidatorFailure(
+  "OpenAI falls back to advertised OIDC scopes",
+  (root) => {
+    const path = join(root, "plugins/unpitch/mcp.json");
+    const config = JSON.parse(readFileSync(path, "utf8"));
+    delete config.mcpServers.unpitch.extensions["com.openai"].auth;
+    writeFileSync(path, JSON.stringify(config));
+  },
+  /must explicitly restrict OpenAI OAuth to email and session renewal/,
+);
+
+expectValidatorFailure(
+  "OpenAI requests profile and phone access",
+  (root) => {
+    const path = join(root, "plugins/unpitch/mcp.json");
+    const config = JSON.parse(readFileSync(path, "utf8"));
+    config.mcpServers.unpitch.extensions["com.openai"].auth.baseScopes.push("profile", "phone");
+    writeFileSync(path, JSON.stringify(config));
+  },
+  /must explicitly restrict OpenAI OAuth to email and session renewal/,
+);
+
+expectValidatorFailure(
+  "OpenAI enables OIDC defaults",
+  (root) => {
+    const path = join(root, "plugins/unpitch/mcp.json");
+    const config = JSON.parse(readFileSync(path, "utf8"));
+    config.mcpServers.unpitch.extensions["com.openai"].auth.oidcEnabled = true;
+    writeFileSync(path, JSON.stringify(config));
+  },
+  /must explicitly restrict OpenAI OAuth to email and session renewal/,
 );
 
 expectValidatorFailure(
@@ -362,4 +418,4 @@ for (const pluginDirectory of ["unpitch", "unpitch-claude-code"]) {
   }
 }
 
-console.log("Package validator mutation tests passed (30 negative cases).");
+console.log("Package validator mutation tests passed (33 negative cases).");
