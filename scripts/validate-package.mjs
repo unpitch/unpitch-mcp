@@ -197,19 +197,7 @@ assert.equal(portableMcp.$schema, "https://agent-plugins.org/schemas/1.0.0/mcp.s
 assert.deepEqual(portableMcp.mcpServers?.unpitch, {
   type: "streamable-http",
   url: endpoint,
-  extensions: {
-    "com.openai": {
-      auth: {
-        type: "oauth",
-        client: { mode: "dcr" },
-        resource: endpoint,
-        baseScopes: ["email", "offline_access"],
-        defaultScopes: [],
-        oidcEnabled: false,
-      },
-    },
-  },
-}, "Portable MCP must explicitly restrict OpenAI OAuth to email and session renewal");
+}, "Portable MCP must use the native OAuth discovery transport");
 
 const hostedClaudeManifest = readJson(join(hostedRoot, ".claude-plugin", "plugin.json"));
 assert.equal(hostedClaudeManifest.name, "unpitch-hosted");

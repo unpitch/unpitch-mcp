@@ -6,8 +6,10 @@
 - Keep the setup skill as a bounded, free connection check. Missing tools produce a short result
   without screen control, plugin-management searches, shell commands, or guessed recovery buttons.
 - Show the returned workspace on success and provide balances only when requested.
-- Record the installed desktop client's rejection of OAuth extensions and require native
-  compatibility and account verification before claiming ChatGPT support works.
+- Remove the unsupported per-server OpenAI auth extension. Use native OAuth discovery with
+  standard identity scopes handled by the Unpitch server and disclosed before consent.
+- Require the matching server rollout and native account verification before claiming ChatGPT
+  support works.
 
 ## 0.3.1
 
