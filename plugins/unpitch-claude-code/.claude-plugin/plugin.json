@@ -1,7 +1,7 @@
 {
   "name": "unpitch",
   "displayName": "Unpitch for Claude Code",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "description": "Make Claude Code better at outreach. Catch AI slop and weak spots in your messages. Test drafts with personas modeled on your ideal buyers, then use the feedback to improve your outreach in the same conversation.",
   "author": {
     "name": "Unpitch",
@@ -14,6 +14,12 @@
   "supportUrl": "https://github.com/unpitch/unpitch-mcp/issues",
   "privacyPolicyUrl": "https://unpitch.ai/privacy",
   "termsOfServiceUrl": "https://unpitch.ai/terms",
-  "keywords": ["unpitch", "outreach", "quality-check", "simulation", "claude-code"],
+  "keywords": [
+    "unpitch",
+    "outreach",
+    "quality-check",
+    "simulation",
+    "claude-code"
+  ],
   "icon": "./assets/unpitch-icon.svg"
 }

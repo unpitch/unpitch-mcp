@@ -1,25 +1,35 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "unpitch-hosted",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "description": "Make Claude and ChatGPT better at outreach. Catch AI slop and weak spots in your messages. Test drafts with personas modeled on your ideal buyers, then use the feedback to improve your outreach in the same conversation.",
   "author": {
     "name": "Unpitch",
-    "url": "https://unpitch.ai"
+    "url": "https://unpitch.ai",
+    "email": "serhii@unpitch.ai"
   },
   "homepage": "https://unpitch.ai",
   "repository": "https://github.com/unpitch/unpitch-mcp",
-  "keywords": ["unpitch", "outreach", "quality-check", "simulation", "mcp"],
+  "keywords": [
+    "unpitch",
+    "outreach",
+    "quality-check",
+    "simulation",
+    "mcp"
+  ],
   "extensions": {
     "com.openai": {
       "onboardingSkill": "./skills/setup-unpitch/SKILL.md",
       "interface": {
         "displayName": "Unpitch",
-        "shortDescription": "Make ChatGPT better at outreach",
+        "shortDescription": "Better outreach with ChatGPT",
         "longDescription": "Make ChatGPT better at outreach. Catch AI slop and weak spots in your messages. Test drafts with personas modeled on your ideal buyers, then use the feedback to improve your outreach in the same conversation.",
         "developerName": "Unpitch",
         "category": "Productivity",
-        "capabilities": ["Read", "Write"],
+        "capabilities": [
+          "Read",
+          "Write"
+        ],
         "websiteURL": "https://unpitch.ai",
         "defaultPrompt": [
           "Check this outreach draft with Unpitch.",
@@ -27,8 +37,12 @@
           "Simulate this exact draft against a selected Unpitch Persona."
         ],
         "logo": "./assets/unpitch-icon.svg",
-        "composerIcon": "./assets/unpitch-icon.svg"
+        "composerIcon": "./assets/unpitch-icon.svg",
+        "supportURL": "https://github.com/unpitch/unpitch-mcp/issues",
+        "privacyPolicyURL": "https://unpitch.ai/privacy",
+        "termsOfServiceURL": "https://unpitch.ai/terms"
       }
     }
-  }
+  },
+  "license": "MIT"
 }

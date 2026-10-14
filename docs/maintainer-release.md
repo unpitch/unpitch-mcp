@@ -6,23 +6,28 @@ supports Dynamic Client Registration for the hosted clients that will install it
 source can be published before that rollout with hosted sign-in clearly marked as unavailable.
 Schema validation alone does not prove sign-in works.
 
-## Current verification status — 10 October 2026
+## Current verification status — 14 October 2026
 
-Production discovery now advertises Dynamic Client Registration, and Claude Desktop sign-in has
-completed through the GitHub marketplace package. The native connector exposes all eleven tools.
-Ten have been exercised: workspace context, document/persona lists, knowledge search, document
-creation/read/update, included Quality Check, run retrieval, and Simulation quote. The document
-creation replay reused the same document, a stale update returned a conflict, and the included
-Quality Check completed at zero credits.
+Production discovery advertises Dynamic Client Registration. Claude Desktop sign-in completed
+through the GitHub marketplace, and the native connector exposes eleven MCP tools. A separate
+synthetic review workspace exercised all eleven tools through Claude, including an explicitly
+approved 40-credit Simulation. The owner connection was restored and verified afterward.
+Document creation replay reused the same Document, a stale update returned a conflict, and an
+included Quality Check completed without spending credits.
 
-Claude Code installation, update to 0.2.2, and a fresh-session workspace read have passed while
-preserving the existing manual connection and public client identity.
+Claude Code installation, update to 0.2.2, and a fresh-session workspace read passed while
+preserving the manual connection and public client identity. Version 0.3.0 adds seven commands
+for eleven total in each package; package checks do not establish native execution of every command.
 
-Remaining native checks are a paid Simulation run after explicit approval of its displayed quote
-and ChatGPT Desktop's install and account connection. The ChatGPT website does not expose
-**Add a marketplace**; test the
-desktop client. Do not represent
-these pending paths as verified or submit the public-directory application yet.
+ChatGPT native install, account connection, and a real tool response remain unverified. Its
+website's personal Plugins menu did not expose Add a marketplace when checked. Follow current
+OpenAI documentation and inspect the actual client's UI instead of treating that older observation
+as a restriction on all ChatGPT surfaces.
+
+Claude's official directory submission for version 0.2.3 passed its security scan and awaits an
+Anthropic reviewer; Publish was requested. It is not live. A source release and a directory
+publication are separate states. OpenAI's official submission is a separate application through
+its Platform Plugins portal; uploading a package creates a draft, not a published listing.
 
 ## Backend dependency
 
@@ -85,7 +90,7 @@ Claude Code compatibility check additionally needs one client with the shipped s
 6. Quote and run one Simulation. Confirm that one approval creates one run and that the result uses
    user-facing finding names without internal principle IDs or numbers.
 7. On a client with the shipped `unpitch@unpitch` plugin and manual `unpitch` server, sync this
-   marketplace and update `unpitch@unpitch`. Verify all four `/unpitch` commands still use that
+   marketplace and update `unpitch@unpitch`. Verify all eleven `/unpitch` commands still use that
    server. On a clean client, run the documented marketplace, plugin, and `claude mcp add` commands.
    In both cases, run `/mcp`, select `unpitch`, and verify the existing public client returns to
    `http://localhost:8080/callback` without a client secret.

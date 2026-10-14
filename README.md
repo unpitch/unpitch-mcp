@@ -9,11 +9,11 @@ Unpitch saves and evaluates the draft you choose. Your assistant revises it with
 Any evaluation that needs credits shows the quote and waits for your explicit approval before
 spending.
 
-> **Connection verification pending (10 October 2026):** Claude Desktop sign-in and ten of the
-> eleven Unpitch tools have been tested in the real app. Claude Code installation, update, and a real
-> workspace read have also passed. The paid Simulation run and ChatGPT Desktop connection are still
-> pending. See
-> [`docs/maintainer-release.md`](./docs/maintainer-release.md) for the remaining release checks.
+> **Connection verification pending (14 October 2026):** All eleven MCP tools, including an
+> approved Simulation, have been exercised through Claude with a separate demo account. Claude Code
+> installation, update, and a real workspace read have passed. ChatGPT's native account connection
+> remains unverified. Claude's official listing is in review and is not live. See
+> [`docs/maintainer-release.md`](./docs/maintainer-release.md).
 
 Installing a plugin and connecting an Unpitch account are separate steps. Both packages add the
 workflows; the hosted package also adds a connector definition, while Claude Code prepares or
@@ -55,8 +55,8 @@ end-to-end connection check before its setup can be marked verified.
 3. Follow the sign-in prompt, choose your workspace, then return to Claude Code. Ask it to show the
    connected workspace and available credits.
 
-Existing users keep the `unpitch@unpitch` plugin, the same connection, and the four `/unpitch`
-commands when the marketplace updates. The setup instructions handle connection details; you do
+Existing users keep the `unpitch@unpitch` plugin, the same connection, and the existing `/unpitch`
+commands; this release adds seven more when the marketplace updates. The setup instructions handle connection details; you do
 not need to enter an API key or client secret.
 
 ## What you can ask
@@ -77,6 +77,29 @@ you explicitly approve that displayed quote, and one confirmation authorizes one
 Tool details: [`docs/tools.md`](./docs/tools.md). Permissions and OAuth separation:
 [`docs/security.md`](./docs/security.md). Troubleshooting:
 [`docs/troubleshooting.md`](./docs/troubleshooting.md).
+
+## Commands
+
+Both plugin variants ship eleven commands. You can also ask naturally; you do not need to learn
+these names to use Unpitch. Each row identifies the command's main MCP operation; workflows may
+use additional tools to resolve the exact Document or read a result.
+
+| Command | Main operation | Purpose |
+| --- | --- | --- |
+| `context` | `get_workspace_context` | Connected workspace and available capacity |
+| `documents` | `list_documents` | Browse saved drafts |
+| `document` | `get_document` | Read one draft and its revision |
+| `knowledge` | `search_knowledge` | Find business context |
+| `readers` | `list_personas` | Choose a target reader |
+| `results` | `get_run` | Read an evaluation result |
+| `save` | `create_document` | Save a new typed draft |
+| `revise` | `update_document` | Apply a requested revision safely |
+| `check` | `run_quality_check` | Check the exact draft |
+| `quote` | `quote_simulation` | See a Simulation price without spending |
+| `simulate` | `run_simulation` | Run one explicitly approved Simulation |
+
+The Claude Code prefix is `/unpitch:`. Hosted clients expose the installed plugin's commands
+and skills using their own interface.
 
 ## Package layout and validation
 
