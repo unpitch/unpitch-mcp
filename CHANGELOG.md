@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.3.0
+
+- Ship eleven commands in both plugin variants, with one primary operation for each MCP tool.
+- Add document browsing, reading, creation, revision, Knowledge Base search, result retrieval,
+  and a Simulation quote command that cannot spend credits.
+- Keep the existing four commands, six skills, and Claude Code connection identity.
+- Validate command inventory, tool permissions, and mirrored package content; reject missing
+  commands and write or spend permissions added to read or quote workflows.
+- Correct verification status: the Claude demo account exercised all eleven MCP tools; native
+  ChatGPT connection remains pending, and Claude's official listing awaits review.
+
 ## 0.2.3
 
 - License the public plugin repository under MIT.

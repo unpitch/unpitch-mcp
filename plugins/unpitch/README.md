@@ -13,9 +13,9 @@ definition; it does not prove that an Unpitch account is connected. Connect Unpi
 plugin's connector settings, sign in, choose one workspace, and verify with
 `get_workspace_context` before using a write or evaluation tool.
 
-This package's machine identity is `unpitch-hosted`; supported clients show **Unpitch**. Claude
-Desktop sign-in and ten of the eleven tools have been tested in the real app. A paid Simulation
-run and ChatGPT Desktop account connection still await end-to-end verification.
+This package's machine identity is `unpitch-hosted`; supported clients show **Unpitch**. All eleven MCP tools, including an explicitly approved Simulation, have been exercised through
+Claude with a separate demo account. ChatGPT native account connection remains unverified.
+Version 0.3.0 ships eleven commands and six skills; installation alone does not prove connection.
 
 The public plugin package is licensed under MIT. Unpitch account access and hosted evaluations are
 covered by the [Unpitch terms](https://unpitch.ai/terms) and

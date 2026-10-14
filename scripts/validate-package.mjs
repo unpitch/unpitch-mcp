@@ -8,7 +8,10 @@ const hostedRoot = join(packageRoot, "plugins", "unpitch");
 const codeRoot = join(packageRoot, "plugins", "unpitch-claude-code");
 const endpoint = "https://api.unpitch.ai/mcp";
 const codeClientId = "ae21983d-3072-43ab-ad47-d5feae975afc";
-const commandNames = ["check.md", "context.md", "readers.md", "simulate.md"];
+const commandNames = [
+  "check.md", "context.md", "readers.md", "simulate.md", "documents.md", "document.md",
+  "save.md", "revise.md", "knowledge.md", "results.md", "quote.md",
+];
 const canonicalToolNames = [
   "get_workspace_context",
   "list_documents",
@@ -122,6 +125,11 @@ function readAllowedTools(path) {
 }
 
 function assertCommandTools(root, label, prefix, expectedByCommand) {
+  assert.deepEqual(
+    readdirSync(root).sort(),
+    [...commandNames].sort(),
+    `${label} must ship exactly the eleven canonical command files`,
+  );
   const union = new Set();
   const declarations = [];
   for (const command of commandNames) {
@@ -174,7 +182,7 @@ assertPackageFiles(codeRoot, codePackageFiles, "Claude Code plugin");
 const portableManifest = readJson(join(hostedRoot, "plugin.json"));
 assert.equal(portableManifest.$schema, "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json");
 assert.equal(portableManifest.name, "unpitch-hosted");
-assert.equal(portableManifest.version, "0.2.3");
+assert.equal(portableManifest.version, "0.3.0");
 assert.equal(
   portableManifest.extensions?.["com.openai"]?.onboardingSkill,
   "./skills/setup-unpitch/SKILL.md",
@@ -311,6 +319,13 @@ assertExactToolRegistry(
 );
 
 const expectedCommandTools = {
+  "documents.md": ["list_documents"],
+  "document.md": ["list_documents","get_document"],
+  "knowledge.md": ["search_knowledge"],
+  "results.md": ["get_run"],
+  "quote.md": ["list_documents","get_document","list_personas","quote_simulation"],
+  "save.md": ["list_documents","get_document","create_document"],
+  "revise.md": ["list_documents","get_document","update_document"],
   "check.md": [
     "get_workspace_context",
     "list_documents",

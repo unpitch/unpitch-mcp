@@ -5,6 +5,7 @@ import {
   mkdirSync,
   mkdtempSync,
   readFileSync,
+  readdirSync,
   rmSync,
   symlinkSync,
   writeFileSync,
@@ -86,8 +87,35 @@ function expectValidatorFailure(name, mutate, messagePattern) {
   }
 }
 
+for (const directory of ["commands", "plugins/unpitch/commands", "plugins/unpitch-claude-code/commands"]) {
+  const inventory = readdirSync(join(packageRoot, directory));
+  assert.equal(inventory.length, 11, `${directory} must ship eleven separate commands`);
+}
+
 const baseline = runScript(packageRoot, "validate-package.mjs");
 assert.equal(baseline.status, 0, outputOf(baseline));
+
+expectValidatorFailure(
+  "missing standalone command",
+  (root) => rmSync(join(root, "plugins/unpitch/commands/quote.md")),
+  /missing or unexpected public package file/,
+);
+
+expectValidatorFailure(
+  "read command gains write permissions",
+  (root) => mutateAllowedTools(root, (tools) => [
+    ...tools, "mcp__plugin_unpitch-hosted_unpitch__update_document",
+  ], "document.md"),
+  /allowed-tools differ from the canonical/,
+);
+
+expectValidatorFailure(
+  "quote command gains spend permissions",
+  (root) => mutateAllowedTools(root, (tools) => [
+    ...tools, "mcp__plugin_unpitch-hosted_unpitch__run_simulation",
+  ], "quote.md"),
+  /allowed-tools differ from the canonical/,
+);
 
 expectValidatorFailure(
   "later wrong-prefix token",
@@ -130,12 +158,11 @@ expectValidatorFailure(
 
 expectValidatorFailure(
   "incomplete command tool union",
-  (root) => mutateAllowedTools(
-    root,
-    (tools) => tools.filter((tool) => !tool.endsWith("__search_knowledge")),
-    "context.md",
-    ".",
-  ),
+  (root) => {
+    for (const command of ["check.md", "context.md", "simulate.md"]) {
+      mutateAllowedTools(root, (tools) => tools.filter((tool) => !tool.endsWith("__get_workspace_context")), command, ".");
+    }
+  },
   /command allowed-tools union must contain the exact 11-tool Unpitch registry/,
 );
 
@@ -335,4 +362,4 @@ for (const pluginDirectory of ["unpitch", "unpitch-claude-code"]) {
   }
 }
 
-console.log("Package validator mutation tests passed (27 negative cases).");
+console.log("Package validator mutation tests passed (30 negative cases).");
