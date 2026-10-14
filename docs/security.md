@@ -11,8 +11,10 @@
   `http://localhost:8080/callback`. There is no client secret.
 - **Install and connection are separate.** Installing either plugin does not prove an account is
   connected. A successful `get_workspace_context` call after sign-in does.
-- **Identity-only sign-in.** Sign-in requests the `email` scope. What each tool may do is declared
-  by the tool, not by the sign-in.
+- **Identity-only sign-in.** Supported identity scopes include email verification and, when
+  requested, name, profile picture, and phone number if provided. The consent screen names the
+  requested account fields before approval. These scopes do not add workspace permissions;
+  tools remain bound to the workspace you choose.
 - **One workspace per authorisation.** On the consent screen you choose exactly one workspace.
   Authorising again replaces the previous authorisation.
 - **Membership follows you.** If you leave the organisation, the authorisation ends with your

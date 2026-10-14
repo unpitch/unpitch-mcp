@@ -95,27 +95,28 @@ for (const directory of ["commands", "plugins/unpitch/commands", "plugins/unpitc
 const baseline = runScript(packageRoot, "validate-package.mjs");
 assert.equal(baseline.status, 0, outputOf(baseline));
 
-const scopedOAuthFixture = makeFixture();
+const nativeSignInFixture = makeFixture();
 try {
-  const path = join(scopedOAuthFixture, "plugins/unpitch/mcp.json");
-  const config = JSON.parse(readFileSync(path, "utf8"));
-  config.mcpServers.unpitch.extensions = {
-    "com.openai": {
-      auth: {
-        type: "oauth",
-        client: { mode: "dcr" },
-        resource: "https://api.unpitch.ai/mcp",
-        baseScopes: ["email", "offline_access"],
-        defaultScopes: [],
-        oidcEnabled: false,
-      },
-    },
-  };
-  writeFileSync(path, JSON.stringify(config));
-  const result = runScript(scopedOAuthFixture, "validate-package.mjs");
-  assert.equal(result.status, 0, "Explicit email/session-only OpenAI OAuth must pass validation: " + outputOf(result));
+  const path = join(nativeSignInFixture, "plugins/unpitch/plugin.json");
+  const manifest = JSON.parse(readFileSync(path, "utf8"));
+  delete manifest.extensions["com.openai"].onboardingSkill;
+  writeFileSync(path, JSON.stringify(manifest));
+  const result = runScript(nativeSignInFixture, "validate-package.mjs");
+  assert.equal(result.status, 0, "Native account sign-in must not require an AI setup conversation: " + outputOf(result));
 } finally {
-  rmSync(scopedOAuthFixture, { recursive: true, force: true });
+  rmSync(nativeSignInFixture, { recursive: true, force: true });
+}
+
+const nativeDiscoveryFixture = makeFixture();
+try {
+  const path = join(nativeDiscoveryFixture, "plugins/unpitch/mcp.json");
+  const config = JSON.parse(readFileSync(path, "utf8"));
+  delete config.mcpServers.unpitch.extensions;
+  writeFileSync(path, JSON.stringify(config));
+  const result = runScript(nativeDiscoveryFixture, "validate-package.mjs");
+  assert.equal(result.status, 0, "Native OAuth discovery transport must pass validation: " + outputOf(result));
+} finally {
+  rmSync(nativeDiscoveryFixture, { recursive: true, force: true });
 }
 
 expectValidatorFailure(
@@ -125,36 +126,69 @@ expectValidatorFailure(
 );
 
 expectValidatorFailure(
-  "OpenAI falls back to advertised OIDC scopes",
+  "account sign-in launches an AI setup conversation",
   (root) => {
-    const path = join(root, "plugins/unpitch/mcp.json");
-    const config = JSON.parse(readFileSync(path, "utf8"));
-    delete config.mcpServers.unpitch.extensions["com.openai"].auth;
-    writeFileSync(path, JSON.stringify(config));
+    const path = join(root, "plugins/unpitch/plugin.json");
+    const manifest = JSON.parse(readFileSync(path, "utf8"));
+    manifest.extensions["com.openai"].onboardingSkill = "./skills/setup-unpitch/SKILL.md";
+    writeFileSync(path, JSON.stringify(manifest));
   },
-  /must explicitly restrict OpenAI OAuth to email and session renewal/,
+  /Account sign-in must not launch an AI onboarding conversation/,
 );
 
 expectValidatorFailure(
-  "OpenAI requests profile and phone access",
+  "missing OpenAI extension",
   (root) => {
-    const path = join(root, "plugins/unpitch/mcp.json");
-    const config = JSON.parse(readFileSync(path, "utf8"));
-    config.mcpServers.unpitch.extensions["com.openai"].auth.baseScopes.push("profile", "phone");
-    writeFileSync(path, JSON.stringify(config));
+    const path = join(root, "plugins/unpitch/plugin.json");
+    const manifest = JSON.parse(readFileSync(path, "utf8"));
+    delete manifest.extensions["com.openai"];
+    writeFileSync(path, JSON.stringify(manifest));
   },
-  /must explicitly restrict OpenAI OAuth to email and session renewal/,
+  /Portable manifest must declare the OpenAI extension/,
 );
 
 expectValidatorFailure(
-  "OpenAI enables OIDC defaults",
+  "missing OpenAI interface",
+  (root) => {
+    const path = join(root, "plugins/unpitch/plugin.json");
+    const manifest = JSON.parse(readFileSync(path, "utf8"));
+    delete manifest.extensions["com.openai"].interface;
+    writeFileSync(path, JSON.stringify(manifest));
+  },
+  /Portable manifest must declare the OpenAI interface/,
+);
+
+expectValidatorFailure(
+  "portable MCP uses an unsupported per-server extension",
   (root) => {
     const path = join(root, "plugins/unpitch/mcp.json");
     const config = JSON.parse(readFileSync(path, "utf8"));
-    config.mcpServers.unpitch.extensions["com.openai"].auth.oidcEnabled = true;
+    config.mcpServers.unpitch.extensions = { "com.openai": { auth: { type: "oauth" } } };
     writeFileSync(path, JSON.stringify(config));
   },
-  /must explicitly restrict OpenAI OAuth to email and session renewal/,
+  /Portable MCP must use the native OAuth discovery transport/,
+);
+
+expectValidatorFailure(
+  "portable MCP adds a static authorization header",
+  (root) => {
+    const path = join(root, "plugins/unpitch/mcp.json");
+    const config = JSON.parse(readFileSync(path, "utf8"));
+    config.mcpServers.unpitch.headers = { Authorization: "Bearer fixture-token" };
+    writeFileSync(path, JSON.stringify(config));
+  },
+  /Portable MCP must use the native OAuth discovery transport/,
+);
+
+expectValidatorFailure(
+  "portable MCP changes the protected resource endpoint",
+  (root) => {
+    const path = join(root, "plugins/unpitch/mcp.json");
+    const config = JSON.parse(readFileSync(path, "utf8"));
+    config.mcpServers.unpitch.url = "https://example.com/mcp";
+    writeFileSync(path, JSON.stringify(config));
+  },
+  /Portable MCP must use the native OAuth discovery transport/,
 );
 
 expectValidatorFailure(
@@ -418,4 +452,4 @@ for (const pluginDirectory of ["unpitch", "unpitch-claude-code"]) {
   }
 }
 
-console.log("Package validator mutation tests passed (33 negative cases).");
+console.log("Package validator mutation tests passed (36 negative cases).");
