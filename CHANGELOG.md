@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.1
+
+- Fix automatic ChatGPT sign-in requesting unsupported OpenID, profile, and phone scopes.
+- Declare OpenAI OAuth in the portable MCP configuration with email and session renewal only,
+  explicit DCR, the exact MCP resource, and disabled OIDC defaults.
+- Preserve all eleven commands, six skills, Claude transports, and the manual Claude Code identity.
+- Validate the closed OAuth policy and reject missing overrides or broader identity permissions.
+
 ## 0.3.0
 
 - Ship eleven commands in both plugin variants, with one primary operation for each MCP tool.

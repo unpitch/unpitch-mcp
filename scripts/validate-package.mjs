@@ -182,7 +182,7 @@ assertPackageFiles(codeRoot, codePackageFiles, "Claude Code plugin");
 const portableManifest = readJson(join(hostedRoot, "plugin.json"));
 assert.equal(portableManifest.$schema, "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json");
 assert.equal(portableManifest.name, "unpitch-hosted");
-assert.equal(portableManifest.version, "0.3.0");
+assert.equal(portableManifest.version, "0.3.1");
 assert.equal(
   portableManifest.extensions?.["com.openai"]?.onboardingSkill,
   "./skills/setup-unpitch/SKILL.md",
@@ -193,7 +193,19 @@ assert.equal(portableMcp.$schema, "https://agent-plugins.org/schemas/1.0.0/mcp.s
 assert.deepEqual(portableMcp.mcpServers?.unpitch, {
   type: "streamable-http",
   url: endpoint,
-});
+  extensions: {
+    "com.openai": {
+      auth: {
+        type: "oauth",
+        client: { mode: "dcr" },
+        resource: endpoint,
+        baseScopes: ["email", "offline_access"],
+        defaultScopes: [],
+        oidcEnabled: false,
+      },
+    },
+  },
+}, "Portable MCP must explicitly restrict OpenAI OAuth to email and session renewal");
 
 const hostedClaudeManifest = readJson(join(hostedRoot, ".claude-plugin", "plugin.json"));
 assert.equal(hostedClaudeManifest.name, "unpitch-hosted");
