@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.3.2
+
+- Remove the optional OpenAI onboarding conversation; account authorization uses the native client.
+- Keep the setup skill as a bounded, free connection check. Missing tools produce a short result
+  without screen control, plugin-management searches, shell commands, or guessed recovery buttons.
+- Show the returned workspace on success and provide balances only when requested.
+- Record the installed desktop client's rejection of OAuth extensions and require native
+  compatibility and account verification before claiming ChatGPT support works.
+
 ## 0.3.1
 
 - Fix automatic ChatGPT sign-in requesting unsupported OpenID, profile, and phone scopes.

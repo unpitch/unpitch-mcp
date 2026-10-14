@@ -182,10 +182,14 @@ assertPackageFiles(codeRoot, codePackageFiles, "Claude Code plugin");
 const portableManifest = readJson(join(hostedRoot, "plugin.json"));
 assert.equal(portableManifest.$schema, "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json");
 assert.equal(portableManifest.name, "unpitch-hosted");
-assert.equal(portableManifest.version, "0.3.1");
+assert.equal(portableManifest.version, "0.3.2");
+const openAiExtension = portableManifest.extensions?.["com.openai"];
+assert.ok(openAiExtension, "Portable manifest must declare the OpenAI extension");
+assert.ok(openAiExtension.interface, "Portable manifest must declare the OpenAI interface");
 assert.equal(
-  portableManifest.extensions?.["com.openai"]?.onboardingSkill,
-  "./skills/setup-unpitch/SKILL.md",
+  openAiExtension.onboardingSkill,
+  undefined,
+  "Account sign-in must not launch an AI onboarding conversation",
 );
 
 const portableMcp = readJson(join(hostedRoot, "mcp.json"));

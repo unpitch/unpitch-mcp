@@ -95,6 +95,18 @@ for (const directory of ["commands", "plugins/unpitch/commands", "plugins/unpitc
 const baseline = runScript(packageRoot, "validate-package.mjs");
 assert.equal(baseline.status, 0, outputOf(baseline));
 
+const nativeSignInFixture = makeFixture();
+try {
+  const path = join(nativeSignInFixture, "plugins/unpitch/plugin.json");
+  const manifest = JSON.parse(readFileSync(path, "utf8"));
+  delete manifest.extensions["com.openai"].onboardingSkill;
+  writeFileSync(path, JSON.stringify(manifest));
+  const result = runScript(nativeSignInFixture, "validate-package.mjs");
+  assert.equal(result.status, 0, "Native account sign-in must not require an AI setup conversation: " + outputOf(result));
+} finally {
+  rmSync(nativeSignInFixture, { recursive: true, force: true });
+}
+
 const scopedOAuthFixture = makeFixture();
 try {
   const path = join(scopedOAuthFixture, "plugins/unpitch/mcp.json");
@@ -122,6 +134,39 @@ expectValidatorFailure(
   "missing standalone command",
   (root) => rmSync(join(root, "plugins/unpitch/commands/quote.md")),
   /missing or unexpected public package file/,
+);
+
+expectValidatorFailure(
+  "account sign-in launches an AI setup conversation",
+  (root) => {
+    const path = join(root, "plugins/unpitch/plugin.json");
+    const manifest = JSON.parse(readFileSync(path, "utf8"));
+    manifest.extensions["com.openai"].onboardingSkill = "./skills/setup-unpitch/SKILL.md";
+    writeFileSync(path, JSON.stringify(manifest));
+  },
+  /Account sign-in must not launch an AI onboarding conversation/,
+);
+
+expectValidatorFailure(
+  "missing OpenAI extension",
+  (root) => {
+    const path = join(root, "plugins/unpitch/plugin.json");
+    const manifest = JSON.parse(readFileSync(path, "utf8"));
+    delete manifest.extensions["com.openai"];
+    writeFileSync(path, JSON.stringify(manifest));
+  },
+  /Portable manifest must declare the OpenAI extension/,
+);
+
+expectValidatorFailure(
+  "missing OpenAI interface",
+  (root) => {
+    const path = join(root, "plugins/unpitch/plugin.json");
+    const manifest = JSON.parse(readFileSync(path, "utf8"));
+    delete manifest.extensions["com.openai"].interface;
+    writeFileSync(path, JSON.stringify(manifest));
+  },
+  /Portable manifest must declare the OpenAI interface/,
 );
 
 expectValidatorFailure(
@@ -418,4 +463,4 @@ for (const pluginDirectory of ["unpitch", "unpitch-claude-code"]) {
   }
 }
 
-console.log("Package validator mutation tests passed (33 negative cases).");
+console.log("Package validator mutation tests passed (36 negative cases).");

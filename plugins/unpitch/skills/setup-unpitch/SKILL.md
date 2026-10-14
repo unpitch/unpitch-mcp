@@ -1,34 +1,38 @@
 ---
 name: setup-unpitch
-description: Connect an Unpitch account and verify the selected workspace without spending credits. Use after installing the plugin or when Unpitch tools report an authorization error.
+description: Verify the connected Unpitch workspace without spending credits. Use after installing the plugin or completing account sign-in.
 ---
 
 # Set up Unpitch
 
-Use this workflow to verify the connection. Installing either package adds workflows. The hosted
-package also supplies connector metadata; Claude Code uses the separately configured manual server
-named `unpitch`. Neither installation proves that the user's Unpitch account is connected.
+Account sign-in belongs to the client's native connection flow. This skill checks the result;
+it cannot install a connector or create account access. Installing a plugin does not prove a
+connection.
 
-1. If the Unpitch tools are available, call `get_workspace_context` once. Do not call a write or
-   evaluation tool during setup.
-2. If the call succeeds, report the workspace and organisation, included evaluation capacity,
-   available credits, monthly room, and reset time. Say that this successful read verifies the
-   connection.
-3. If the tool is unavailable, returns an authorization error, or cannot start sign-in, guide the
-   current host's actual setup flow. ChatGPT opens sign-in automatically during installation;
-   complete that browser window and choose one workspace. Do not assume ChatGPT has a Connect
-   button or a Connectors tab. If automatic sign-in fails, report the failure and inspect the
-   plugin screen's available recovery controls before giving another step. Claude uses this
-   plugin's **Connectors** tab or MCP connection settings. In Claude Code, have
-   the user open **Settings > Integrations** in Unpitch, choose **Set up**, and paste those setup
-   instructions into Claude Code. They install from the marketplace and prepare or reuse the
-   existing `unpitch` server. Then have the user open `/mcp`, sign in, and choose one workspace.
-   Wait until they say that step is complete before retrying. Do not offer a ZIP or raw command as
-   an alternative setup path.
-4. Never ask the user to paste a token, authorization code, client secret, or browser callback URL
-   into the conversation.
-5. Never claim the account is connected until `get_workspace_context` succeeds. If it still fails,
-   report the error plainly and stop rather than retrying in a loop.
+If `get_workspace_context` is available, call it once. On success, say "Connected to [workspace]."
+Use the returned workspace name. Give credit balances, capacity, organisation and reset details
+only if the user asks for them. Do not call writes, evaluations, or any other tool during this check.
 
-One authorization grants access to one workspace. Changing the workspace requires authorizing
-again and choosing the new workspace.
+If the tool is missing in ChatGPT or Codex, immediately say: "Unpitch's tools aren't available in
+this chat, so I can't verify the connection yet." Stop. Missing tools do not prove an expired login;
+the plugin or client may have failed to load the connection. Do not investigate the client's screen,
+use computer control, invoke plugin-management, search files or settings, research documentation,
+run shell commands, or ask the user to describe buttons. Do not send the user back to this setup
+conversation or recommend reinstalling. Do not announce an investigation before this short result.
+
+If an available tool returns an authorization error, let the client handle its native sign-in
+prompt. If it supplies a sign-in action, ask the user to complete that action and choose a workspace.
+If no action is supplied, report the returned error and stop; do not invent a Connect button,
+Connectors tab, sign-in link, or other recovery control. Retry the workspace read at most once,
+only after the user confirms sign-in completed. Stop if that read fails.
+
+For Claude, the known account connection lives in the plugin's **Connectors** tab or MCP settings.
+For Claude Code, the manual server is named `unpitch`: use `/mcp` for its account sign-in. If that
+server is not configured, guide the user to Unpitch's **Settings > Integrations**, **Set up** for
+Claude Code. Those instructions install from the marketplace and prepare or reuse the
+existing `unpitch` server. Do not offer a ZIP or raw command as
+an alternative setup path.
+
+Never ask for a token, authorization code, client secret or browser callback URL in the conversation.
+Never claim the account is connected until `get_workspace_context` succeeds. One authorization grants
+access to one workspace; changing it requires native sign-in and choosing the new workspace.

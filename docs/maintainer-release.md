@@ -25,6 +25,12 @@ Version 0.3.1 adds an explicit OpenAI OAuth scope override in portable `mcp.json
 `email` and `offline_access`, no OIDC defaults. Claude's separate transport is unchanged.
 A fresh native installation and real workspace response still need verification after this fix.
 
+The installed ChatGPT/Codex desktop build 20156 (26.1007.30912) rejects the portable MCP server's
+`extensions` field before loading its tools. Its setup conversation consequently cannot connect
+an account. An official update to build 20398 is available, but its parser and OAuth flow have not
+yet been verified. Version 0.3.2 removes the optional AI onboarding launch and bounds the remaining
+setup skill. That instruction change does not resolve or prove native MCP compatibility.
+
 ChatGPT native install, account connection, and a real tool response remain unverified. Its
 website's personal Plugins menu did not expose Add a marketplace when checked. Follow current
 OpenAI documentation and inspect the actual client's UI instead of treating that older observation

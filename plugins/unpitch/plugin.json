@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "unpitch-hosted",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Make Claude and ChatGPT better at outreach. Catch AI slop and weak spots in your messages. Test drafts with personas modeled on your ideal buyers, then use the feedback to improve your outreach in the same conversation.",
   "author": {
     "name": "Unpitch",
@@ -19,7 +19,6 @@
   ],
   "extensions": {
     "com.openai": {
-      "onboardingSkill": "./skills/setup-unpitch/SKILL.md",
       "interface": {
         "displayName": "Unpitch",
         "shortDescription": "Better outreach with ChatGPT",
